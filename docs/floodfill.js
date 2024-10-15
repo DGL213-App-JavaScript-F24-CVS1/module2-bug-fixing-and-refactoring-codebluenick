@@ -105,9 +105,9 @@ function updatePlayerScore() {
 playerScore = playerScore > 0 ? playerScore -= 1 : 0;
 }
 
-function floodFill(grid, gridCoordinate, colorToChange) { 
-    if (arraysAreEqual(colorToChange, replacementColor)) { return } //The current cell is already the selected color
-    else if (!arraysAreEqual(grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column], colorToChange)) { return }  //The current cell is a different color than the initially clicked-on cell
+function floodFill(grid, gridCoordinate, colorToChange) {
+    if (arraysAreEqual(colorToChange, replacementColor)) { return }
+    else if (!arraysAreEqual(grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column], colorToChange)) { return }
     else {
         grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column] = replacementColor;
         floodFill(grid, {column: Math.max(gridCoordinate.column - 1, 0), row: gridCoordinate.row}, colorToChange);
@@ -115,7 +115,7 @@ function floodFill(grid, gridCoordinate, colorToChange) {
         floodFill(grid, {column: gridCoordinate.column, row: Math.max(gridCoordinate.row - 1, 0)}, colorToChange);
         floodFill(grid, {column: gridCoordinate.column, row: Math.min(gridCoordinate.row + 1, CELLS_PER_AXIS - 1)}, colorToChange);
     }
-    return
+    return;
 }
 
 function restart() {
@@ -130,8 +130,15 @@ function restart() {
 
 canvas.addEventListener("mousedown", gridClickHandler);
 function gridClickHandler(event) {
-     updatePlayerScore();
-    updateGridAt(event.offsetX, event.offsetY);
+    const gridCoordinates = convertCartesiansToGrid(event.offsetX, event.offsetY);
+    console.log(`Clicked on column: ${gridCoordinates.column}, row: ${gridCoordinates.row}`);
+    ctx.fillStyle = 'yellow';  // Temporarily color the clicked cell yellow
+    ctx.fillRect(gridCoordinates.column * CELL_WIDTH, gridCoordinates.row * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
+    // Delay the actual grid update to allow yellow cell to be shown briefly
+    setTimeout(() => {
+        updatePlayerScore();
+        updateGridAt(event.offsetX, event.offsetY);
+    }, 200); // 200 ms delay to visualize the yellow fill
 }
 
 restartButton.addEventListener("mousedown", restartClickHandler);
