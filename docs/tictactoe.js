@@ -21,6 +21,7 @@ let grids = [];  // History of game states
 
 // Game objects
 
+let currentPlayer = true;  // true for Player X, false for Player O
 
 // #endregion
 
@@ -28,12 +29,10 @@ let grids = [];  // History of game states
 // *****************************************************************************
 // #region Game Logic
 
-function startGame(startingGrid = []) {
-    if (startingGrid.length === 0) {
-        startingGrid = initializeGrid();
-    }
+function startGame() {
+    const startingGrid = initializeGrid();
     initializeHistory(startingGrid);
-    render(grids[0]);
+    render(grids[0]);  // Render the initial empty grid
 }
 
 function initializeGrid() {
