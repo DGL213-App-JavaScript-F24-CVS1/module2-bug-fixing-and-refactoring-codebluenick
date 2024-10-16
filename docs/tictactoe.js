@@ -54,8 +54,23 @@ function render(grid) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
 
     for (let i = 0; i < grid.length; i++) {
+        const row = Math.floor(i / CELLS_PER_AXIS);
+        const column = i % CELLS_PER_AXIS;
+        const xPos = column * CELL_WIDTH;
+        const yPos = row * CELL_HEIGHT;
+
+        // Draw the grid lines
+        ctx.strokeStyle = 'black';
+        ctx.strokeRect(xPos, yPos, CELL_WIDTH, CELL_HEIGHT);
+
+        // Draw "X" or "O" if the cell is filled
+        if (grid[i] === "X" || grid[i] === "O") {
+            ctx.font = "48px Arial";  // Set font for X and O
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(grid[i], xPos + CELL_WIDTH / 2, yPos + CELL_HEIGHT / 2);  // Draw X or O in the center
+        }
     }
-    playerScoreText.textContent = playerScore;
 }
 
 function updateGridAt(mousePositionX, mousePositionY) {
