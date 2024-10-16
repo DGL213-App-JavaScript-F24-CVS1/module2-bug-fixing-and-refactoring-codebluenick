@@ -96,11 +96,16 @@ function render(grid) {
 
 function updateGridAt(mousePositionX, mousePositionY) {
     const gridCoordinates = convertCartesiansToGrid(mousePositionX, mousePositionY);
-    const newGrid = grids[grids.length-1].slice(); 
-    floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.column * CELLS_PER_AXIS + gridCoordinates.row])
-    grids.push(newGrid);
-    render(grids[grids.length-1]);    
+    const newGrid = grids[grids.length-1].slice();
+    
+    if (!arraysAreEqual(newGrid[gridCoordinates.column * CELLS_PER_AXIS + gridCoordinates.row], replacementColor)) {
+        floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.column * CELLS_PER_AXIS + gridCoordinates.row]);
+        grids.push(newGrid);
+        render(grids[grids.length-1]);
+        updatePlayerScore();
+    }
 }
+
 
 function updatePlayerScore() {
 playerScore = playerScore > 0 ? playerScore -= 1 : 0;
