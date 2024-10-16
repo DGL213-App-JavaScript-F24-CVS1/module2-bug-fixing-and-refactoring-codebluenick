@@ -14,9 +14,10 @@ const restartButton = document.querySelector("#restart");
 const undoButton = document.querySelector('#undo');
 
 // Constants
-const CELLS_PER_AXIS = 3;
-const CELL_WIDTH = canvas.width/CELLS_PER_AXIS;
-const CELL_HEIGHT = canvas.height/CELLS_PER_AXIS;
+const CELLS_PER_AXIS = 3;  // Tic Tac Toe grid size
+const CELL_WIDTH = canvas.width / CELLS_PER_AXIS;
+const CELL_HEIGHT = canvas.height / CELLS_PER_AXIS;
+let grids = [];  // History of game states
 
 // Game objects
 
