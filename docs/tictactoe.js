@@ -140,6 +140,7 @@ function restart() {
 
 canvas.addEventListener("mousedown", gridClickHandler);
 function gridClickHandler(event) {
+    updateGridAt(event.offsetX, event.offsetY);
 }
 
 restartButton.addEventListener("mousedown", restartClickHandler);
