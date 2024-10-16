@@ -113,9 +113,19 @@ function checkWin(grid) {
             return true;
         }
 
-        // Update the player's score
-        updatePlayerScore();
+        // Check columns
+        if (grid[i] === grid[i + CELLS_PER_AXIS] && 
+            grid[i] === grid[i + 2 * CELLS_PER_AXIS] &&
+            grid[i] !== "") {
+            return true;
+        }
     }
+
+    // Check diagonals
+    if (grid[0] === grid[4] && grid[0] === grid[8] && grid[0] !== "") return true;
+    if (grid[2] === grid[4] && grid[2] === grid[6] && grid[2] !== "") return true;
+
+    return false;
 }
 
 function restart() {
