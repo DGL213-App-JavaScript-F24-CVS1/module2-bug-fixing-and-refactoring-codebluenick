@@ -89,10 +89,15 @@ function updateGridAt(mousePositionX, mousePositionY) {
     grids.push(newGrid);  // Push the new grid to the history
     render(newGrid);  // Re-render the game board
 
-    // Compare new grid with the last one before pushing
-    if (!arraysAreEqual(grids[grids.length - 1], newGrid)) {
-        // Push the updated grid to history only if there's a change
-        grids.push(newGrid);
+    // Check if the current player has won
+    if (checkWin(newGrid)) {
+        alert(`Player ${currentPlayer ? "X" : "O"} wins!`);
+        restart();  // Reset the game after a win
+        return;
+    }
+
+    togglePlayer();  // Switch players
+}
 
         // Render the updated grid
         render(grids[grids.length - 1]);
