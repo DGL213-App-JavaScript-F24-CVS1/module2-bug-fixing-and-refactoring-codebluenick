@@ -20,7 +20,6 @@ const CELL_HEIGHT = canvas.height / CELLS_PER_AXIS;
 let grids = [];  // History of game states
 
 // Game objects
-
 let currentPlayer = true;  // true for Player X, false for Player O
 
 // #endregion
@@ -36,11 +35,7 @@ function startGame() {
 }
 
 function initializeGrid() {
-    const newGrid = [];
-    for (let i = 0; i < CELLS_PER_AXIS * CELLS_PER_AXIS; i++) {
-        newGrid.push(chooseRandomPropertyFrom(CELL_COLORS));
-    }
-    return newGrid;
+    return Array(CELLS_PER_AXIS * CELLS_PER_AXIS).fill("");  // Empty grid for Tic Tac Toe
 }
 
 function initializeHistory(startingGrid) {
