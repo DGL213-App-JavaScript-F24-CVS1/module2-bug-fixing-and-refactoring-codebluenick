@@ -96,12 +96,20 @@ function render(grid) {
 
 function updateGridAt(mousePositionX, mousePositionY) {
     const gridCoordinates = convertCartesiansToGrid(mousePositionX, mousePositionY);
-    const newGrid = grids[grids.length-1].slice();
-    
-    if (!arraysAreEqual(newGrid[gridCoordinates.column * CELLS_PER_AXIS + gridCoordinates.row], replacementColor)) {
-        floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.column * CELLS_PER_AXIS + gridCoordinates.row]);
+    const newGrid = grids[grids.length - 1].slice();  // Create a copy of the current grid
+
+    // Perform the flood fill operation
+    floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.column * CELLS_PER_AXIS + gridCoordinates.row]);
+
+    // Compare new grid with the last one before pushing
+    if (!arraysAreEqual(grids[grids.length - 1], newGrid)) {
+        // Push the updated grid to history only if there's a change
         grids.push(newGrid);
-        render(grids[grids.length-1]);
+
+        // Render the updated grid
+        render(grids[grids.length - 1]);
+
+        // Update the player's score
         updatePlayerScore();
     }
 }
