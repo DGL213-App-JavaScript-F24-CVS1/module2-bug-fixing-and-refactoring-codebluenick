@@ -75,10 +75,19 @@ function render(grid) {
 
 function updateGridAt(mousePositionX, mousePositionY) {
     const gridCoordinates = convertCartesiansToGrid(mousePositionX, mousePositionY);
+
+    // Check if the clicked cell is already taken
+    if (grids[grids.length - 1][gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column] !== "") {
+        return;  // Do nothing if the cell is already filled
+    }
+
     const newGrid = grids[grids.length - 1].slice();  // Create a copy of the current grid
 
-    // Perform the flood fill operation
-    floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.column * CELLS_PER_AXIS + gridCoordinates.row]);
+    // Place either "X" or "O" depending on the current player
+    newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column] = currentPlayer ? "X" : "O";
+
+    grids.push(newGrid);  // Push the new grid to the history
+    render(newGrid);  // Re-render the game board
 
     // Compare new grid with the last one before pushing
     if (!arraysAreEqual(grids[grids.length - 1], newGrid)) {
