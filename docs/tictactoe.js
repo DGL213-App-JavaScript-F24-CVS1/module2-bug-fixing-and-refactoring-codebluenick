@@ -140,15 +140,6 @@ function restart() {
 
 canvas.addEventListener("mousedown", gridClickHandler);
 function gridClickHandler(event) {
-    const gridCoordinates = convertCartesiansToGrid(event.offsetX, event.offsetY);
-    console.log(`Clicked on column: ${gridCoordinates.column}, row: ${gridCoordinates.row}`);
-    ctx.fillStyle = 'yellow';  // Temporarily color the clicked cell yellow
-    ctx.fillRect(gridCoordinates.column * CELL_WIDTH, gridCoordinates.row * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
-    // Delay the actual grid update to allow yellow cell to be shown briefly
-    setTimeout(() => {
-        updatePlayerScore();
-        updateGridAt(event.offsetX, event.offsetY);
-    }, 200); // 200 ms delay to visualize the yellow fill
 }
 
 restartButton.addEventListener("mousedown", restartClickHandler);
@@ -161,7 +152,6 @@ function undoLastMove() {
     rollBackHistory();
 }
 
-
 // #endregion
 
 
@@ -171,11 +161,10 @@ function undoLastMove() {
 // To convert canvas coordinates to grid coordinates
 function convertCartesiansToGrid(xPos, yPos) {
     return {
-        column: Math.floor(xPos/CELL_WIDTH),
-        row: Math.floor(yPos/CELL_HEIGHT)
+        column: Math.floor(xPos / CELL_WIDTH),
+        row: Math.floor(yPos / CELL_HEIGHT)
     };
 }
-
 
 // #endregion
 
