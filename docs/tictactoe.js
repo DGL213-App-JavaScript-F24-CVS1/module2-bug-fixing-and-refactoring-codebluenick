@@ -99,8 +99,10 @@ function updateGridAt(mousePositionX, mousePositionY) {
     togglePlayer();  // Switch players
 }
 
-        // Render the updated grid
-        render(grids[grids.length - 1]);
+function togglePlayer() {
+    currentPlayer = !currentPlayer;  // Toggle between Player X and Player O
+}
+
 
         // Update the player's score
         updatePlayerScore();
