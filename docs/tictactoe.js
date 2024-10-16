@@ -51,10 +51,9 @@ function rollBackHistory() {
 }
 
 function render(grid) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+
     for (let i = 0; i < grid.length; i++) {
-        ctx.fillStyle = `rgb(${grid[i][0]}, ${grid[i][1]}, ${grid[i][2]})`;
-        console.log(`Rendering color: rgb(${grid[i][0]}, ${grid[i][1]}, ${grid[i][2]}) at cell ${i}`);
-        ctx.fillRect((i % CELLS_PER_AXIS) * CELL_WIDTH, Math.floor(i / CELLS_PER_AXIS) * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
     }
     playerScoreText.textContent = playerScore;
 }
