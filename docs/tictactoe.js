@@ -103,6 +103,15 @@ function togglePlayer() {
     currentPlayer = !currentPlayer;  // Toggle between Player X and Player O
 }
 
+function checkWin(grid) {
+    // Check rows, columns, and diagonals
+    for (let i = 0; i < CELLS_PER_AXIS; i++) {
+        // Check rows
+        if (grid[i * CELLS_PER_AXIS] === grid[i * CELLS_PER_AXIS + 1] && 
+            grid[i * CELLS_PER_AXIS] === grid[i * CELLS_PER_AXIS + 2] &&
+            grid[i * CELLS_PER_AXIS] !== "") {
+            return true;
+        }
 
         // Update the player's score
         updatePlayerScore();
