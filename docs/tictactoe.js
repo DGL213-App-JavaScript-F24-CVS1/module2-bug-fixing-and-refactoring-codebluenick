@@ -60,7 +60,7 @@ function render(grid) {
         const yPos = row * CELL_HEIGHT;
 
         // Draw the grid lines
-        ctx.strokeStyle = 'black';
+        ctx.strokeStyle = 'white';
         ctx.strokeRect(xPos, yPos, CELL_WIDTH, CELL_HEIGHT);
 
         // Draw "X" or "O" if the cell is filled
@@ -129,7 +129,10 @@ function checkWin(grid) {
 }
 
 function restart() {
-    startGame(grids[0]);
+    const emptyGrid = initializeGrid();  // Reset the grid
+    grids = [emptyGrid];  // Reset the history
+    currentPlayer = true;  // Reset to Player X's turn
+    render(emptyGrid);  // Re-render the empty grid
 }
 
 // #endregion
