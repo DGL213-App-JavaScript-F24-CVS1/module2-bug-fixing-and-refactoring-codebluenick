@@ -40,13 +40,13 @@ function initializeGrid() {
 
 function initializeHistory(startingGrid) {
     grids = [];
-    grids.push(startingGrid);
-}   
+    grids.push(startingGrid);  // Add the initial empty grid to history
+}
 
 function rollBackHistory() {
-    if (grids.length > 0) {
-        grids = grids.slice(0, grids.length-1);
-        render(grids[grids.length-1]);
+    if (grids.length > 1) {  // Ensure there's a previous state to undo
+        grids = grids.slice(0, grids.length - 1);  // Remove the latest move
+        render(grids[grids.length - 1]);  // Re-render the previous grid
     }
 }
 
